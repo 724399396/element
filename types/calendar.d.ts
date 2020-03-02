@@ -12,4 +12,7 @@ export declare class ElCalendar extends ElementUIComponent {
 
   /** First day of week */
   firstDayOfWeek: number
+
+  /** Click dateCell change date if true, otherwise click not change date */
+  clickable: Boolean
 }

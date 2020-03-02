@@ -15,7 +15,8 @@ export default {
     },
     date: Date,
     hideHeader: Boolean,
-    firstDayOfWeek: Number
+    firstDayOfWeek: Number,
+    clickable: Boolean
   },
 
   inject: ['elCalendar'],
@@ -65,6 +66,10 @@ export default {
     pickDay({ text, type }) {
       const date = this.getFormateDate(text, type);
       this.$emit('pick', date);
+    },
+
+    conditionalPickDay(arg) {
+      this.clickable && this.pickDay(arg);
     },
 
     cellRenderProxy({ text, type }) {
@@ -185,7 +190,7 @@ export default {
               {
                 row.map((cell, key) => <td key={key}
                   class={ this.getCellClass(cell) }
-                  onClick={this.pickDay.bind(this, cell)}>
+                  onClick={ this.conditionalPickDay.bind(this, cell) } >
                   <div class="el-calendar-day">
                     {
                       this.cellRenderProxy(cell)

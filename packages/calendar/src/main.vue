@@ -37,6 +37,7 @@
         :date="date"
         :selected-day="realSelectedDay"
         :first-day-of-week="realFirstDayOfWeek"
+        :clickable="clickable"
         @pick="pickDay" />
     </div>
     <div
@@ -51,6 +52,7 @@
         :range="range"
         :hide-header="index !== 0"
         :first-day-of-week="realFirstDayOfWeek"
+        :clickable="clickable"
         @pick="pickDay" />
     </div>
   </div>
@@ -97,6 +99,10 @@ export default {
     firstDayOfWeek: {
       type: Number,
       default: 1
+    },
+    clickable: {
+      type: Boolean,
+      default: true
     }
   },
 
