@@ -162,6 +162,27 @@ export default {
     }
   },
 
+  watch: {
+    rows: {
+      immediate: true,
+      handler(newValue, oldValue) {
+        const newFlat = newValue.flat();
+        const newFirstDay = this.getFormateDate(newFlat[0].text, newFlat[0].type);
+        const newLastDay = this.getFormateDate(newFlat[newFlat.length - 1].text, newFlat[newFlat.length - 1].type);
+        if (!oldValue) {
+          this.$emit('date-range-change', {start: newFirstDay, end: newLastDay});
+        } else {
+          const oldFlat = oldValue.flat();
+          const oldFirstDay = this.getFormateDate(oldFlat[0].text, oldFlat[0].type);
+
+          if (newFirstDay !== oldFirstDay) {
+            this.$emit('date-range-change', {start: newFirstDay, end: newLastDay});
+          }
+        }
+      }
+    }
+  },
+
   render() {
     const thead = this.hideHeader ? null : (<thead>
       {

@@ -38,7 +38,8 @@
         :selected-day="realSelectedDay"
         :first-day-of-week="realFirstDayOfWeek"
         :clickable="clickable"
-        @pick="pickDay" />
+        @pick="pickDay"
+        @date-range-change="dateRangeChange"/>
     </div>
     <div
       v-else
@@ -53,7 +54,8 @@
         :hide-header="index !== 0"
         :first-day-of-week="realFirstDayOfWeek"
         :clickable="clickable"
-        @pick="pickDay" />
+        @pick="pickDay"
+        @date-range-change="dateRangeChange"/>
     </div>
   </div>
 </template>
@@ -115,6 +117,10 @@ export default {
   methods: {
     pickDay(day) {
       this.realSelectedDay = day;
+    },
+
+    dateRangeChange(dates) {
+      this.$emit('date-range-change', dates);
     },
 
     selectDate(type) {
